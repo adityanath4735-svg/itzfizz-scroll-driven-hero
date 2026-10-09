@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0b;
+  --fg: #f4f1ea;
+  --muted: #8d8a84;
+  --accent: #ff5a1f;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f1ea;
+    --fg: #0a0a0b;
+    --muted: #6b6862;
+  }
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+}
+
+/* Road is pure CSS: base line + dashed lane markings */
+.road {
+  position: relative;
+  height: 1px;
+  background: color-mix(in srgb, var(--fg) 25%, transparent);
+}
+
+.road-lane {
+  position: absolute;
+  inset: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--fg) 22%, transparent) 0 18px,
+    transparent 18px 40px
+  );
+}
+
+.trail {
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, transparent, var(--accent));
+}
+
+/* Scroll-revealed start states (GSAP animates these) */
+.char,
+.stat-inner {
+  opacity: .12;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char,
+  .stat-inner {
+    opacity: 1 !important;
+  }
+}
